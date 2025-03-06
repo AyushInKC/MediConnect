@@ -1,0 +1,6 @@
+spring:
+  data:
+    mongodb:
+      uri: mongodb+srv://sirfayush1008:Ayush%403344@cluster0.ngtgm.mongodb.net/MediConnect?retryWrites=true&w=majority
+
+
