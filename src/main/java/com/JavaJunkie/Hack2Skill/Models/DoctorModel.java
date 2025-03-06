@@ -1,7 +1,7 @@
 package com.JavaJunkie.Hack2Skill.Models;
 
 import lombok.Data;
-import org.bson.codecs.pojo.annotations.BsonId;
+
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
