@@ -56,4 +56,10 @@ public class DoctorController {
         List<DoctorModel> doctors=doctorService.findDoctorByDistrict(district);
         return doctors.isEmpty() ? ResponseEntity.notFound().build() : ResponseEntity.ok(doctors);
     }
+
+    @GetMapping("/list-all")
+    public ResponseEntity<?> listAll(){
+        List<DoctorModel> doctorModels=doctorService.listAll();
+        return doctorModels.isEmpty() ? ResponseEntity.notFound().build() : ResponseEntity.ok(doctorModels);
+    }
 }

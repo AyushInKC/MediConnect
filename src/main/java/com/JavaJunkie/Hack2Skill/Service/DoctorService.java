@@ -2,10 +2,11 @@ package com.JavaJunkie.Hack2Skill.Service;
 
 import com.JavaJunkie.Hack2Skill.Models.DoctorModel;
 import com.JavaJunkie.Hack2Skill.Repository.DoctorRepository;
+import org.springframework.stereotype.Service;
 
 import javax.print.Doc;
 import java.util.List;
-
+@Service
 public class DoctorService {
 
     private final DoctorRepository doctorRepository;
@@ -27,5 +28,9 @@ public class DoctorService {
     }
     public List<DoctorModel> findDoctorByDesignation(String name) {
         return doctorRepository.findByDesignationContainingIgnoreCase(name);
+    }
+
+    public List<DoctorModel> listAll() {
+        return doctorRepository.findAll();
     }
 }
