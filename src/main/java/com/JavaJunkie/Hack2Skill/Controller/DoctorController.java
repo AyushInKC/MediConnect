@@ -25,8 +25,8 @@ public class DoctorController {
    }
 
    @GetMapping("/by-name")
-   public ResponseEntity<?> findDoctorByName(@RequestParam String Name){
-      List<DoctorModel>  doctors=doctorService.findDoctorByName(Name);
+   public ResponseEntity<?> findDoctorByName(@RequestParam String name){
+      List<DoctorModel>  doctors=doctorService.findDoctorByName(name);
        return doctors.isEmpty() ? ResponseEntity.notFound().build() : ResponseEntity.ok(doctors);
    }
 
