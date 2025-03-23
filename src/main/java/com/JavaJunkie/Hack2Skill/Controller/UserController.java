@@ -6,6 +6,9 @@ import com.JavaJunkie.Hack2Skill.Models.UserModel;
 import com.JavaJunkie.Hack2Skill.Service.UserService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
+
+import java.io.IOException;
 
 @RestController
 @RequestMapping("/user")
@@ -26,7 +29,11 @@ public class UserController {
        return userService.login(userLoginDTO);
     }
 
-    @PutMapping("/update/{email}")
+    @PutMapping("/updateProfilePicture/{email}")
+    public ResponseEntity<String> updateProfilePicture(@PathVariable String email,@RequestParam("file") MultipartFile file) throws IOException {
+       return ResponseEntity.ok(userService.updateProfilePicture(email,file));
+    }
+    @PutMapping("/updateData/{email}")
     public ResponseEntity<String> updateUser(@PathVariable String email, @RequestBody UserModel updatedUser) {
         return ResponseEntity.ok(userService.updateUserDetails(email, updatedUser));
     }

@@ -16,5 +16,6 @@ public class DoctorModel {
     private String designation;
     private String qualification;
     private String district;
+    private byte[] profileImage;
 }
 

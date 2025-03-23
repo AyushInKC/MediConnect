@@ -8,17 +8,20 @@ import com.JavaJunkie.Hack2Skill.Repository.UserRepository;
 import com.JavaJunkie.Hack2Skill.Utils.JWTUtility;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
 import java.util.Optional;
 @Service
 public class UserService {
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
     private final JWTUtility jwtUtility;
-    public UserService(UserRepository userRepository,PasswordEncoder passwordEncoder,JWTUtility jwtUtility){
-        this.userRepository=userRepository;
-        this.passwordEncoder=passwordEncoder;
-        this.jwtUtility=jwtUtility;
+
+    public UserService(UserRepository userRepository, PasswordEncoder passwordEncoder, JWTUtility jwtUtility) {
+        this.userRepository = userRepository;
+        this.passwordEncoder = passwordEncoder;
+        this.jwtUtility = jwtUtility;
     }
 
     public String signup(UserSignUpDTO userDTO) {
@@ -36,12 +39,13 @@ public class UserService {
     }
 
     public UserLoginResponseDTO login(UserLoginDTO loginDTO) {
-        Optional<UserModel> user = userRepository.findByEmail(loginDTO.getEmail());
+        Optional<UserModel> userOptional = userRepository.findByEmail(loginDTO.getEmail());
 
-        if (user.isPresent() && passwordEncoder.matches(loginDTO.getPassword(), user.get().getPassword())) {
+        if (userOptional.isPresent() && passwordEncoder.matches(loginDTO.getPassword(), userOptional.get().getPassword())) {
+            UserModel user = userOptional.get();
             String accessToken = jwtUtility.generateAccessToken(loginDTO.getEmail());
             String refreshToken = jwtUtility.generateRefreshToken(loginDTO.getEmail());
-            return new UserLoginResponseDTO(accessToken, refreshToken);
+            return new UserLoginResponseDTO(accessToken, refreshToken, user.getName(), user.getEmail());
         } else {
             throw new RuntimeException("Invalid email or password!");
         }
@@ -60,6 +64,17 @@ public class UserService {
 
             userRepository.save(user);
             return "User details updated successfully!";
+        }
+        return "User not found!";
+    }
+
+    public String updateProfilePicture(String email, MultipartFile file) throws IOException {
+        Optional<UserModel> userOptional = userRepository.findByEmail(email);
+        if (userOptional.isPresent()) {
+            UserModel user = userOptional.get();
+            user.setProfileImage(file.getBytes());
+            userRepository.save(user);
+            return "Profile Picture updated successfully!";
         }
         return "User not found!";
     }

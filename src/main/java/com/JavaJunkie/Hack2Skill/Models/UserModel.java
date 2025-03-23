@@ -16,4 +16,5 @@ public class UserModel {
     private String symptoms;
     private String description;
     private String currentDiagnosis;
+    private byte[] profileImage;
 }

@@ -7,13 +7,16 @@ import lombok.Data;
 import org.springframework.stereotype.Service;
 
 import javax.crypto.SecretKey;
+import java.util.Base64;
 import java.util.Date;
+
 @Data
 @Service
 public class JWTUtility {
-    private static final SecretKey SECRET_KEY = Keys.secretKeyFor(SignatureAlgorithm.HS512);
 
-    private static final long JWT_EXPIRATION = 604800000L;
+    private static final SecretKey SECRET_KEY = Keys.secretKeyFor(SignatureAlgorithm.HS512);
+    private static final String BASE64_SECRET = Base64.getEncoder().encodeToString(SECRET_KEY.getEncoded());
+     private static final long JWT_EXPIRATION = 604800000L;
     private static final long REFRESH_TOKEN_EXPIRATION = 2592000000L;
 
     public String generateAccessToken(String username) {
@@ -21,17 +24,16 @@ public class JWTUtility {
                 .setSubject(username)
                 .setIssuedAt(new Date())
                 .setExpiration(new Date(System.currentTimeMillis() + JWT_EXPIRATION))
-                .signWith(SignatureAlgorithm.HS512, SECRET_KEY)
+                .signWith(SECRET_KEY, SignatureAlgorithm.HS512)
                 .compact();
     }
-
 
     public String generateRefreshToken(String username) {
         return Jwts.builder()
                 .setSubject(username)
                 .setIssuedAt(new Date())
                 .setExpiration(new Date(System.currentTimeMillis() + REFRESH_TOKEN_EXPIRATION))
-                .signWith(SignatureAlgorithm.HS512, SECRET_KEY)
+                .signWith(SECRET_KEY, SignatureAlgorithm.HS512)
                 .compact();
     }
 
@@ -53,7 +55,6 @@ public class JWTUtility {
                 .getBody();
     }
 
-
     private boolean isTokenExpired(String token) {
         Date expiration = extractClaims(token).getExpiration();
         return expiration.before(new Date());
@@ -63,7 +64,7 @@ public class JWTUtility {
         return extractClaims(token).getSubject();
     }
 
-    public SecretKey getSecretKey() {
-        return SECRET_KEY;
+    public String getBase64Secret() {
+        return BASE64_SECRET;
     }
 }

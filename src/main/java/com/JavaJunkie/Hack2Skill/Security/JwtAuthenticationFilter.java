@@ -20,8 +20,12 @@ import java.util.Collections;
 @Component
 public class JwtAuthenticationFilter extends OncePerRequestFilter {
 
-    @Autowired
-    private JWTUtility jwtUtility;
+
+    private final JWTUtility jwtUtility;
+
+    public JwtAuthenticationFilter(JWTUtility jwtUtility){
+        this.jwtUtility=jwtUtility;
+    }
 
     private static final Logger logger = LoggerFactory.getLogger(JwtAuthenticationFilter.class);
 
@@ -35,11 +39,8 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
             token = token.substring(7).trim();
 
             try {
-                Claims claims = Jwts.parserBuilder()
-                        .setSigningKey(jwtUtility.getSecretKey())
-                        .build()
-                        .parseClaimsJws(token)
-                        .getBody();
+
+                Claims claims = jwtUtility.extractClaims(token);
 
                 UsernamePasswordAuthenticationToken authenticationToken =
                         new UsernamePasswordAuthenticationToken(
