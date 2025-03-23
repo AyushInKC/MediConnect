@@ -32,6 +32,7 @@ public class SecurityConfiguration {
                                 .requestMatchers("/user/**","/doctor/**").permitAll()
                                 .anyRequest().authenticated()
                 )
+
                 .addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class)
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS));
 

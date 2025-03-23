@@ -4,3 +4,18 @@ spring:
       uri: mongodb+srv://sirfayush1008:Ayush%403344@cluster0.ngtgm.mongodb.net/MediConnect?retryWrites=true&w=majority
 
 
+  mail:
+    host: smtp.gmail.com
+    port: 587
+    username: sirfayush1008@gmail.com
+    password: ogdh ecww pyvy ppqj
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls:
+            enable: true
+
+
+  fast2sms:
+    apiKey: fJkyF7hcNqGumE5oArX86lReSsKnaQxUHzPtYIDgTVv49bCM0L6cw8ax1FYpAHvbft3MuoQhND4ZlLjT

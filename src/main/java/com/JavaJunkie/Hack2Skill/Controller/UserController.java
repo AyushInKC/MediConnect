@@ -3,11 +3,11 @@ import com.JavaJunkie.Hack2Skill.DTO.UserLoginDTO;
 import com.JavaJunkie.Hack2Skill.DTO.UserLoginResponseDTO;
 import com.JavaJunkie.Hack2Skill.DTO.UserSignUpDTO;
 import com.JavaJunkie.Hack2Skill.Models.UserModel;
+import com.JavaJunkie.Hack2Skill.Service.EmailService;
 import com.JavaJunkie.Hack2Skill.Service.UserService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
-
 import java.io.IOException;
 
 @RestController
@@ -15,8 +15,10 @@ import java.io.IOException;
 public class UserController {
 
    private final UserService userService;
-   public UserController(UserService userService){
+   private final EmailService emailService;
+   public UserController(UserService userService,EmailService emailService){
        this.userService=userService;
+       this.emailService=emailService;
    }
 
     @PostMapping("/signup")
@@ -37,4 +39,10 @@ public class UserController {
     public ResponseEntity<String> updateUser(@PathVariable String email, @RequestBody UserModel updatedUser) {
         return ResponseEntity.ok(userService.updateUserDetails(email, updatedUser));
     }
+
+    @PostMapping("/send-mail")
+    public String sendEmail(@RequestParam String to, @RequestParam String subject, @RequestParam String body) {
+        return emailService.sendEmail(to, subject, body);
+    }
+
 }
