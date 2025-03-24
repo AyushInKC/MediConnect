@@ -6,9 +6,12 @@ import com.JavaJunkie.Hack2Skill.Models.UserModel;
 import com.JavaJunkie.Hack2Skill.Service.EmailService;
 import com.JavaJunkie.Hack2Skill.Service.UserService;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.oauth2.core.user.OAuth2User;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import java.io.IOException;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/user")
@@ -44,5 +47,8 @@ public class UserController {
     public String sendEmail(@RequestParam String to, @RequestParam String subject, @RequestParam String body) {
         return emailService.sendEmail(to, subject, body);
     }
+
+
+
 
 }

@@ -19,6 +19,7 @@ public class SecurityConfiguration {
     @Autowired
     private JwtAuthenticationFilter jwtAuthenticationFilter;
 
+
     @Bean
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
@@ -29,10 +30,9 @@ public class SecurityConfiguration {
         http
                 .csrf(csrf -> csrf.disable())
                 .authorizeHttpRequests(auth -> auth
-                                .requestMatchers("/user/**","/doctor/**").permitAll()
+                                .requestMatchers("/user/**","/doctor/**","/medical-chat").permitAll()
                                 .anyRequest().authenticated()
                 )
-
                 .addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class)
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS));
 

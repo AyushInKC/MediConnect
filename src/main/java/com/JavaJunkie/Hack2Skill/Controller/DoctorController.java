@@ -62,4 +62,5 @@ public class DoctorController {
         List<DoctorModel> doctorModels=doctorService.listAll();
         return doctorModels.isEmpty() ? ResponseEntity.notFound().build() : ResponseEntity.ok(doctorModels);
     }
+
 }
