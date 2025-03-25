@@ -1,5 +1,4 @@
 package com.JavaJunkie.Hack2Skill.Configuration;
-
 import com.JavaJunkie.Hack2Skill.Security.JwtAuthenticationFilter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -30,7 +29,7 @@ public class SecurityConfiguration {
         http
                 .csrf(csrf -> csrf.disable())
                 .authorizeHttpRequests(auth -> auth
-                                .requestMatchers("/user/**","/doctor/**","/medical-chat").permitAll()
+                                .requestMatchers("/user/signup","/user/login","/doctor/**","/medical-chat").permitAll()
                                 .anyRequest().authenticated()
                 )
                 .addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class)

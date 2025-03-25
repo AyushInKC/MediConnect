@@ -1,4 +1,5 @@
 package com.JavaJunkie.Hack2Skill.Utils;
+
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
@@ -7,7 +8,6 @@ import lombok.Data;
 import org.springframework.stereotype.Service;
 
 import javax.crypto.SecretKey;
-import java.util.Base64;
 import java.util.Date;
 
 @Data
@@ -15,8 +15,7 @@ import java.util.Date;
 public class JWTUtility {
 
     private static final SecretKey SECRET_KEY = Keys.secretKeyFor(SignatureAlgorithm.HS512);
-    private static final String BASE64_SECRET = Base64.getEncoder().encodeToString(SECRET_KEY.getEncoded());
-     private static final long JWT_EXPIRATION = 604800000L;
+    private static final long JWT_EXPIRATION = 604800000L;
     private static final long REFRESH_TOKEN_EXPIRATION = 2592000000L;
 
     public String generateAccessToken(String username) {
@@ -24,7 +23,7 @@ public class JWTUtility {
                 .setSubject(username)
                 .setIssuedAt(new Date())
                 .setExpiration(new Date(System.currentTimeMillis() + JWT_EXPIRATION))
-                .signWith(SECRET_KEY, SignatureAlgorithm.HS512)
+                .signWith(SECRET_KEY)
                 .compact();
     }
 
@@ -33,7 +32,7 @@ public class JWTUtility {
                 .setSubject(username)
                 .setIssuedAt(new Date())
                 .setExpiration(new Date(System.currentTimeMillis() + REFRESH_TOKEN_EXPIRATION))
-                .signWith(SECRET_KEY, SignatureAlgorithm.HS512)
+                .signWith(SECRET_KEY)
                 .compact();
     }
 
@@ -62,9 +61,5 @@ public class JWTUtility {
 
     public String extractUsername(String token) {
         return extractClaims(token).getSubject();
-    }
-
-    public String getBase64Secret() {
-        return BASE64_SECRET;
     }
 }

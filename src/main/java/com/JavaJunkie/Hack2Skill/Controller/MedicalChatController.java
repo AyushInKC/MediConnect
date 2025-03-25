@@ -4,10 +4,12 @@ import com.JavaJunkie.Hack2Skill.Service.MedicalChatService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import java.util.Map;
 
-@RestController("/medical-chat")
+@RestController
+@RequestMapping("/medical-chat")
 public class MedicalChatController {
      private final MedicalChatService medicalChatService;
 

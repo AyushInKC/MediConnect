@@ -3,8 +3,6 @@ package com.JavaJunkie.Hack2Skill.Service;
 import com.JavaJunkie.Hack2Skill.Models.DoctorModel;
 import com.JavaJunkie.Hack2Skill.Repository.DoctorRepository;
 import org.springframework.stereotype.Service;
-
-import javax.print.Doc;
 import java.util.List;
 @Service
 public class DoctorService {
