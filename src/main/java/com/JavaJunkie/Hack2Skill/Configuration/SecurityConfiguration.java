@@ -29,7 +29,7 @@ public class SecurityConfiguration {
         http
                 .csrf(csrf -> csrf.disable())
                 .authorizeHttpRequests(auth -> auth
-                                .requestMatchers("/user/signup","/user/login","/doctor/**","/medical-chat").permitAll()
+                                .requestMatchers("/user/signup","/user/login","/doctor/**","/medical-chat","/api/videoCall/generate-meeting").permitAll()
                                 .anyRequest().authenticated()
                 )
                 .addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class)
