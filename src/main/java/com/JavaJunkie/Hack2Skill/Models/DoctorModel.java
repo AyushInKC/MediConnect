@@ -9,13 +9,18 @@ import org.springframework.data.mongodb.core.mapping.Document;
 @Document(collection = "Doctors")
 public class DoctorModel {
   @Id
-    private String id;
-    private String name;
-    private String hospital;
-    private String phone;
-    private String designation;
-    private String qualification;
-    private String district;
-    private byte[] profileImage;
+  private String id;
+  private String name;
+  private String specialization;
+  private double rating;
+  private String experience;
+  private String location;
+  private String availability;
+  private String image;
+  private String phone;
+  private String email;
+  private String description;
+  private String price;
+
 }
 
