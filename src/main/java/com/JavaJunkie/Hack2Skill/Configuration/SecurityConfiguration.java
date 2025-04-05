@@ -29,7 +29,7 @@ public class SecurityConfiguration {
         http
                 .csrf(csrf -> csrf.disable())
                 .authorizeHttpRequests(auth -> auth
-                                .requestMatchers("/user/signup","/user/login","/user/nearby-hospitals","/doctor/**","/medical-chat","/api/videoCall/generate-meeting","/medicines/**","/appointment/**","/cart/**","/auth/**").permitAll()
+                                .requestMatchers("/user/send-sms","/user/signup","/user/login","/user/nearby-hospitals","/doctor/**","/medical-chat","/api/videoCall/generate-meeting","/medicines/**","/appointment/**","/cart/**","/auth/**").permitAll()
                                 .anyRequest().authenticated()
                 )
                 .addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class)

@@ -21,6 +21,7 @@ public class UserController {
    private final UserService userService;
    private final EmailService emailService;
    private final HospitalService hospitalService;
+
    public UserController(UserService userService, EmailService emailService, HospitalService hospitalService){
        this.userService=userService;
        this.emailService=emailService;
