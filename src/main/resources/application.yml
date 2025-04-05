@@ -19,3 +19,18 @@ spring:
 
   fast2sms:
     apiKey: fJkyF7hcNqGumE5oArX86lReSsKnaQxUHzPtYIDgTVv49bCM0L6cw8ax1FYpAHvbft3MuoQhND4ZlLjT
+
+  security:
+    oauth2:
+      client:
+        registration:
+          google:
+            client-id: Y470705012926-jdqop1etpuhuj6ma438aem3ngoo5lor9.apps.googleusercontent.com
+            client-secret: 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
+            scope: profile, email
+            redirect-uri: "http://localhost:8080/login/oauth2/code/{registrationId}"
+        provider:
+          google:
+            authorization-uri: https://accounts.google.com/o/oauth2/auth
+            token-uri: https://oauth2.googleapis.com/token
+            user-info-uri: https://www.googleapis.com/oauth2/v3/userinfo

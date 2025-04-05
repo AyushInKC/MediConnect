@@ -12,6 +12,16 @@
 	<artifactId>Hack2Skill</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>MediConnect</name>
+<!--	<repositories>-->
+<!--		<repository>-->
+<!--			<id>google-maven</id>-->
+<!--			<url>https://maven.google.com</url>-->
+<!--		</repository>-->
+<!--		<repository>-->
+<!--			<id>central</id>-->
+<!--			<url>https://repo.maven.apache.org/maven2</url>-->
+<!--		</repository>-->
+<!--	</repositories>-->
 	<description>Project for the Hack2Skill hackathon</description>
 	<url/>
 	<licenses>
@@ -29,6 +39,7 @@
 	<properties>
 		<java.version>17</java.version>
 	</properties>
+
 	<dependencies>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
@@ -42,12 +53,38 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-web</artifactId>
 		</dependency>
+        <dependency>
+            <groupId>com.google.firebase</groupId>
+            <artifactId>firebase-admin</artifactId>
+            <version>9.2.0</version> <!-- You can use the latest version -->
+        </dependency>
+
+        <dependency>
+			<groupId>org.json</groupId>
+			<artifactId>json</artifactId>
+			<version>20210307</version>
+		</dependency>
 		<dependency>
 			<groupId>io.github.cdimascio</groupId>
 			<artifactId>java-dotenv</artifactId>
 			<version>3.0.0</version>
 		</dependency>
-
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-oauth2-client</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-data-rest</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>com.fasterxml.jackson.core</groupId>
+			<artifactId>jackson-databind</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-json</artifactId>
+		</dependency>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-mail</artifactId>

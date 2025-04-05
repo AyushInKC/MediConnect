@@ -4,11 +4,14 @@ import com.JavaJunkie.Hack2Skill.DTO.UserLoginResponseDTO;
 import com.JavaJunkie.Hack2Skill.DTO.UserSignUpDTO;
 import com.JavaJunkie.Hack2Skill.Models.UserModel;
 import com.JavaJunkie.Hack2Skill.Service.EmailService;
+import com.JavaJunkie.Hack2Skill.Service.HospitalService;
 import com.JavaJunkie.Hack2Skill.Service.UserService;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import java.io.IOException;
+import java.util.Map;
 
 
 @RestController
@@ -17,9 +20,11 @@ public class UserController {
 
    private final UserService userService;
    private final EmailService emailService;
-   public UserController(UserService userService,EmailService emailService){
+   private final HospitalService hospitalService;
+   public UserController(UserService userService, EmailService emailService, HospitalService hospitalService){
        this.userService=userService;
        this.emailService=emailService;
+       this.hospitalService=hospitalService;
    }
 
     @PostMapping("/signup")
@@ -46,7 +51,12 @@ public class UserController {
         return emailService.sendEmail(to, subject, body);
     }
 
-
-
-
+    @GetMapping("/nearby-hospitals")
+    public ResponseEntity<Map<String, Object>> getNearbyHospitals(
+            @RequestParam("latitude") double latitude,
+            @RequestParam("longitude") double longitude
+    ) {
+        Map<String, Object> response = hospitalService.findNearbyHospitals(latitude, longitude);
+        return new ResponseEntity<>(response, HttpStatus.OK);
+    }
 }
