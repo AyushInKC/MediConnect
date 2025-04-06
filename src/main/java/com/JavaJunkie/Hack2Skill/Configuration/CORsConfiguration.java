@@ -1,4 +1,5 @@
 package com.JavaJunkie.Hack2Skill.Configuration;
+
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
@@ -14,10 +15,8 @@ public class CORsConfiguration {
                 registry.addMapping("/**")
                         .allowedOrigins("*")
                         .allowedMethods("GET", "POST", "PUT", "DELETE")
-                        .allowedHeaders("*")
-                        .allowCredentials(true);
+                        .allowedHeaders("*");
             }
         };
     }
-
 }
